@@ -206,6 +206,7 @@ fi
 # git branch name via the git-prompt script shipped with git
 for __f in /usr/lib/git-core/git-sh-prompt \
   /usr/share/git-core/contrib/completion/git-prompt.sh \
+  /usr/share/bash-completion/completions/git-prompt.sh \
   /usr/share/git/completion/git-prompt.sh; do
   [ -f "$__f" ] && { . "$__f"; break; }
 done

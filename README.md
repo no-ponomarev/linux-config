@@ -65,7 +65,7 @@ VS Code (Windows) ── Remote-SSH ──> cluster
     `PROMPT_HOST_COLOR=<0-255>` in `~/.bashrc.local`.
   - Sets the **terminal title** to `user@host: dir`; local tmux reads it to show
     the remote host/dir (see below).
-  - git branch via `git-prompt.sh` (Debian/Ubuntu and RHEL/SUSE paths).
+  - git branch via `git-prompt.sh` (Debian/Ubuntu, RHEL/Fedora, SUSE, Arch paths).
 - **Secrets are NOT in this file.** It sources `~/.bashrc.secrets` (private
   environment variables) and derives `GH_TOKEN` from `~/.netrc`.
 - **Machine-local overrides:** `~/.bashrc.local` (not tracked).
