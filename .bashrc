@@ -110,8 +110,10 @@ if __have eza; then
   # Always pass a path: without one, eza reads file names from stdin when stdin
   # isn't a terminal (pipes, Claude Code/VS Code tool shells) -> empty or hangs.
   # Options must use the --opt=value form.
-  unalias ls 2>/dev/null # (re-sourcing) an alias would break the definition
-  ls() {
+  # Drop any system/earlier `ls` alias (SUSE defines one). `function ls` syntax,
+  # because `ls()` would be alias-expanded while this block is parsed.
+  unalias ls 2>/dev/null
+  function ls {
     local a
     for a in "$@"; do
       case $a in -*) ;; *) command eza --group-directories-first --icons="$__EZA_ICONS" "$@"; return ;; esac

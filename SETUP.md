@@ -52,8 +52,10 @@ Steps:
    - ripgrep, fd, bat (musl builds), tree-sitter CLI (needs a recent glibc;
      if it fails, see step 8). These are static: copying `~/bin/<tool>` from the
      laptop with rsync works.
-   - eza (musl build): `eza_x86_64-unknown-linux-musl.tar.gz` from
-     `github.com/eza-community/eza/releases` → `~/bin/eza/eza`.
+   - eza: use the **glibc** build `eza_x86_64-unknown-linux-gnu.tar.gz` (needs
+     only glibc ≥ 2.18) from `github.com/eza-community/eza/releases` →
+     `~/bin/eza/eza`. Not the musl one: it can't resolve LDAP/AD user names
+     (shows numeric UIDs on clusters).
    - fzf: `git clone --depth 1 https://github.com/junegunn/fzf ~/.fzf && ~/.fzf/install --all`
 7. **nvim config:** `git clone https://github.com/no-ponomarev/nvim-config.git ~/.config/nvim`
    (or rsync it from the laptop if there's no internet).
