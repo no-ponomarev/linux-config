@@ -72,8 +72,8 @@ VS Code (Windows) ── Remote-SSH ──> cluster
 
 ### `.gitconfig` (local **and** remote)
 - Name/email, `core.editor = nvim`.
-- Intel proxy for `https://github.com` and `https://lfs.github.com` only (other
-  hosts go direct). Credentials for https come from `~/.netrc` (read by git
+- Intel proxy for `https://github.com` only (other hosts go direct; a fallback
+  for when `.bashrc`'s `https_proxy` isn't set, e.g. scripts/cron). Credentials for https come from `~/.netrc` (read by git
   automatically) — no credential helper needed.
 
 ### `.tmux.conf` (local only)

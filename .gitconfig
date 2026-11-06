@@ -3,7 +3,5 @@
     name = Nikita Ponomarev
 [http "https://github.com"]
     proxy = http://proxy-dmz.intel.com:912
-[http "https://lfs.github.com"]
-    proxy = http://proxy-dmz.intel.com:912
 [core]
     editor = nvim
