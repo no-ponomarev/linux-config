@@ -1,5 +1,14 @@
 # ~/.bashrc — interactive bash configuration
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Proxy — set before the interactive check so non-interactive shells (e.g.
+# `ssh host 'git pull'`, scripts run over ssh) get it too. On machines that must
+# not use it: `unset http_proxy https_proxy no_proxy` in ~/.bashrc.local.
+# ─────────────────────────────────────────────────────────────────────────────
+export http_proxy=http://proxy-dmz.intel.com:912
+export https_proxy=http://proxy-dmz.intel.com:912
+export no_proxy="127.0.0.1,localhost,intel.com"
+
 # If not running interactively, don't do anything
 case $- in
 *i*) ;;
@@ -29,13 +38,6 @@ path_prepend() {
   esac
 }
 __have() { command -v "$1" >/dev/null 2>&1; }
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Proxy
-# ─────────────────────────────────────────────────────────────────────────────
-export http_proxy=http://proxy-dmz.intel.com:912
-export https_proxy=http://proxy-dmz.intel.com:912
-export no_proxy="127.0.0.1,localhost,intel.com"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # PATH / development tools

@@ -53,8 +53,10 @@ VS Code (Windows) ── Remote-SSH ──> cluster
   `tmux-256color` coming from local tmux), switches to `xterm-256color`.
 - **Tools on PATH:** `~/bin/{nvim,ripgrep,fd,bat,tree-sitter}`, `~/.local/bin`.
   `EDITOR=nvim`, `vim`/`vi` aliases.
-- **Proxy:** Intel `proxy-dmz.intel.com:912` (`http_proxy`/`https_proxy`). If a
-  cluster must not use it, unset it in that machine's `~/.bashrc.local`.
+- **Proxy:** Intel `proxy-dmz.intel.com:912` (`http_proxy`/`https_proxy`), set at
+  the very top so non-interactive shells (`ssh host cmd`, scripts) get it too.
+  It's the only proxy setting (git uses it as well). If a machine must not use
+  it: `unset http_proxy https_proxy no_proxy` in its `~/.bashrc.local`.
 - **History, readline, colours, aliases, `extract`, `mkcd`, fzf integration.**
 - **Prompt:** two-line `╭─ user@host  dir  ⎇ branch  (env)` / `╰─❯`.
   - **Per-cluster host colour:** laptop = blue; every other host gets a stable
@@ -72,9 +74,10 @@ VS Code (Windows) ── Remote-SSH ──> cluster
 
 ### `.gitconfig` (local **and** remote)
 - Name/email, `core.editor = nvim`.
-- Intel proxy for `https://github.com` only (other hosts go direct; a fallback
-  for when `.bashrc`'s `https_proxy` isn't set, e.g. scripts/cron). Credentials for https come from `~/.netrc` (read by git
-  automatically) — no credential helper needed.
+- No proxy here on purpose: git uses `https_proxy` from `.bashrc`, which can be
+  switched off per machine (a `http.proxy` in `.gitconfig` would override it).
+- Credentials for https come from `~/.netrc` (read by git automatically) — no
+  credential helper needed.
 
 ### `.tmux.conf` (local only)
 - Prefix **`C-a`**, mouse on, 50k scrollback, vi copy mode, new panes/windows
