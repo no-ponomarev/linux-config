@@ -12,7 +12,8 @@ for the shell/tmux side. It works together with a second repo:
 The [nvim-config](https://github.com/no-ponomarev/nvim-config) repo has its own README with tool downloads (nvim, ripgrep, fd,
 bat, tree-sitter CLI) and its file layout. **Both repos are needed** for the full
 environment. Step-by-step setup (laptop and clusters, including instructions for
-an AI agent) is in **[SETUP.md](SETUP.md)**.
+an AI agent) is in **[SETUP.md](SETUP.md)**; setting up project repos on a
+cluster is in **[PROJECTS.md](PROJECTS.md)**.
 
 ---
 
@@ -29,14 +30,13 @@ Windows laptop
          └─ …
 
 VS Code (Windows) ── Remote-SSH ──> cluster
-   └─ main development, mostly oneCCL (`oneccl-v2-fork`)
+   └─ development work
    └─ Claude Code extension runs ON THE CLUSTER
       (needs the Claude settings and credentials there)
 ```
 
-- **Main development** happens in VS Code opened on the remote cluster, mostly on
-  the oneCCL project `oneccl-v2-fork`. The Claude Code VS Code extension runs on
-  the cluster, so the cluster must have the Claude settings and credentials.
+- **Development** happens in VS Code opened on the remote cluster. The Claude
+  Code VS Code extension runs on the cluster, so the cluster must have the Claude settings and credentials.
 - **nvim** is a helper editor, used on the clusters over `ssh` from local tmux.
 - **tmux runs only locally.** Clusters do not need tmux; every ssh session is a
   window/pane of the local tmux.

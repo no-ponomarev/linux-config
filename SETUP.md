@@ -62,8 +62,7 @@ Steps:
      cluster if possible; otherwise copy and test.
    - Without internet, also consider `checker = { enabled = false }` (lazy's
      update checker) to avoid background fetch failures.
-9. **Projects:** clone repos (e.g. oneCCL `oneccl-v2-fork`) from git rather than
-   copying working trees; if copying, exclude `build/` dirs.
+9. **Projects:** set up project repos as described in [PROJECTS.md](PROJECTS.md).
 10. **Verify** (report results):
     - `ssh <host> 'bash -lic "echo \$TERM; type -t __build_prompt; [ -r ~/.bashrc.secrets ] && echo secrets-readable; nvim --version | head -1"'`
     - Open a local tmux window, `ssh <host>`: prompt shows the host in its
