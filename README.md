@@ -51,13 +51,19 @@ VS Code (Windows) ── Remote-SSH ──> cluster
   dirs, WSL-only parts gated by `IS_WSL` (detected from `/proc/version`).
 - **TERM fallback:** if the machine has no terminfo for `$TERM` (e.g.
   `tmux-256color` coming from local tmux), switches to `xterm-256color`.
-- **Tools on PATH:** `~/bin/{nvim,ripgrep,fd,bat,tree-sitter}`, `~/.local/bin`.
+- **Tools on PATH:** `~/bin/{nvim,ripgrep,fd,bat,eza,tree-sitter}`, `~/.local/bin`.
   `EDITOR=nvim`, `vim`/`vi` aliases.
 - **Proxy:** Intel `proxy-dmz.intel.com:912` (`http_proxy`/`https_proxy`), set at
   the very top so non-interactive shells (`ssh host cmd`, scripts) get it too.
   It's the only proxy setting (git uses it as well). If a machine must not use
   it: `unset http_proxy https_proxy no_proxy` in its `~/.bashrc.local`.
 - **History, readline, colours, aliases, `extract`, `mkcd`, fzf integration.**
+- **`ls` = eza** (if installed): icons (off in VS Code's terminal, which has no
+  Nerd Font), dirs first, no git column. `ll` long + dotfiles, `la`, `lt` by
+  time (newest last), `tree` (2 levels, skips `.git`/`build`). `ls` is a function
+  that always passes a path, because eza otherwise reads file names from stdin
+  when it isn't a terminal (pipes, Claude Code tool shells). Use `--opt=value`
+  forms; for GNU-only flags use `\ls`. Without eza, the GNU `ls` aliases apply.
 - **Prompt:** two-line `╭─ user@host  dir  ⎇ branch  (env)` / `╰─❯`.
   - **Per-cluster host colour:** laptop = blue; every other host gets a stable
     colour derived from its hostname with trailing node numbers stripped, so all

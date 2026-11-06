@@ -50,7 +50,10 @@ Steps:
    - nvim: use the **`.tar.gz`** release (AppImages need FUSE, often missing).
      On old glibc use `neovim/neovim-releases`.
    - ripgrep, fd, bat (musl builds), tree-sitter CLI (needs a recent glibc;
-     if it fails, see step 8).
+     if it fails, see step 8). These are static: copying `~/bin/<tool>` from the
+     laptop with rsync works.
+   - eza (musl build): `eza_x86_64-unknown-linux-musl.tar.gz` from
+     `github.com/eza-community/eza/releases` → `~/bin/eza/eza`.
    - fzf: `git clone --depth 1 https://github.com/junegunn/fzf ~/.fzf && ~/.fzf/install --all`
 7. **nvim config:** `git clone https://github.com/no-ponomarev/nvim-config.git ~/.config/nvim`
    (or rsync it from the laptop if there's no internet).

@@ -46,6 +46,7 @@ path_prepend "$HOME/bin/nvim"
 path_prepend "$HOME/bin/ripgrep"
 path_prepend "$HOME/bin/fd"
 path_prepend "$HOME/bin/bat"
+path_prepend "$HOME/bin/eza"
 path_prepend "$HOME/bin/tree-sitter"
 path_prepend "$HOME/.local/bin" # Claude Code, pipx, etc.
 export PATH
@@ -100,11 +101,36 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export GREP_COLORS='mt=1;38;5;208:fn=38;5;39:ln=38;5;71:se=38;5;244'
 
-alias ls='ls --color=auto --group-directories-first'
-alias ll='ls -alhF'
-alias la='ls -A'
-alias l='ls -CF'
-alias lt='ls -alhFtr'            # sorted by time, newest last
+# ls: eza (icons, colours) when available, GNU ls otherwise.
+# GNU-only flags (e.g. `ls -ltr`) need the real one: \ls or command ls.
+if __have eza; then
+  # Icons need a Nerd Font; VS Code's terminal usually doesn't have one
+  __EZA_ICONS=auto
+  [ "$TERM_PROGRAM" = vscode ] && __EZA_ICONS=never
+  # Always pass a path: without one, eza reads file names from stdin when stdin
+  # isn't a terminal (pipes, Claude Code/VS Code tool shells) -> empty or hangs.
+  # Options must use the --opt=value form.
+  unalias ls 2>/dev/null # (re-sourcing) an alias would break the definition
+  ls() {
+    local a
+    for a in "$@"; do
+      case $a in -*) ;; *) command eza --group-directories-first --icons="$__EZA_ICONS" "$@"; return ;; esac
+    done
+    command eza --group-directories-first --icons="$__EZA_ICONS" "$@" .
+  }
+  alias ll='ls -la'                 # long, incl. dotfiles
+  alias la='ls -a'
+  alias l='ls'
+  alias lt='ls -la --sort=modified' # sorted by time, newest last
+  alias tree="ls --tree --level=2 --ignore-glob='.git|build|__pycache__|node_modules'"
+else
+  unset -f ls 2>/dev/null
+  alias ls='ls --color=auto --group-directories-first'
+  alias ll='ls -alhF'
+  alias la='ls -A'
+  alias l='ls -CF'
+  alias lt='ls -alhFtr'            # sorted by time, newest last
+fi
 alias grep='grep --color=auto'
 alias fgrep='grep -F --color=auto'
 alias egrep='grep -E --color=auto'
