@@ -6,7 +6,7 @@ for the shell/tmux side. It works together with a second repo:
 
 | Repo | What | Installed to |
 |---|---|---|
-| **linux-config** (this one) — `github.com/no-ponomarev/linux-config` | `.bashrc`, `.tmux.conf`, this README | `~/` |
+| **linux-config** (this one) — `github.com/no-ponomarev/linux-config` | `.bashrc`, `.gitconfig`, `.tmux.conf`, this README | `~/` |
 | **nvim-config** — `github.com/no-ponomarev/nvim-config` | Neovim config (lazy.nvim, catppuccin, lualine, neo-tree, fzf-lua, treesitter, which-key) | `~/.config/nvim` |
 
 The nvim-config repo has its own README with tool downloads (nvim, ripgrep, fd,
@@ -69,6 +69,12 @@ VS Code (Windows) ── Remote-SSH ──> cluster
 - **conda (miniforge in `~/bin/miniforge`):** loaded only if installed; `base`
   is not auto-activated.
 
+### `.gitconfig` (local **and** remote)
+- Name/email, `core.editor = nvim`.
+- Intel proxy for `https://github.com` and `https://lfs.github.com` only (other
+  hosts go direct). Credentials for https come from `~/.netrc` (read by git
+  automatically) — no credential helper needed.
+
 ### `.tmux.conf` (local only)
 - Prefix **`C-a`**, mouse on, 50k scrollback, vi copy mode, new panes/windows
   open in the current dir, `C-a r` reloads.
@@ -115,7 +121,7 @@ not the WSL one.
 ### Local (WSL2 laptop)
 1. Windows Terminal font: **Hack Nerd Font**.
 2. `git clone https://github.com/no-ponomarev/linux-config.git ~/etc/linux-config`
-   and copy `.bashrc`, `.tmux.conf` to `~/` (back up existing ones first).
+   and copy `.bashrc`, `.gitconfig`, `.tmux.conf` to `~/` (back up existing ones first).
 3. tmux ≥ 3.4, then tpm:
    `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`,
    start tmux, press `C-a I` to install plugins.
@@ -142,7 +148,7 @@ Steps:
    which git gcc curl; curl -sI https://github.com >/dev/null && echo internet'`.
    Shell must be bash. Note glibc version and whether GitHub is reachable
    (the `.bashrc` proxy may be needed).
-2. **Shell config:** copy `.bashrc` from this repo to `~/.bashrc`.
+2. **Shell + git config:** copy `.bashrc` and `.gitconfig` from this repo to `~/`.
 3. **Login shell must load `.bashrc`** (ssh and VS Code Remote start login
    shells; VS Code takes its environment — including the Bedrock token — from
    it). If neither `~/.bash_profile` nor `~/.profile` sources `~/.bashrc`, add to
@@ -180,8 +186,8 @@ Steps:
     - `claude --version` (if installed) works without login prompts.
 
 ### Pulling updates later
-- Laptop: edit `~/.bashrc` / `~/.tmux.conf`, copy them into this repo, commit,
-  push. nvim: commit/push in `~/.config/nvim`.
+- Laptop: edit `~/.bashrc` / `~/.gitconfig` / `~/.tmux.conf`, copy them into
+  this repo, commit, push. nvim: commit/push in `~/.config/nvim`.
 - Cluster: re-run steps 2, 7–8 (or `git -C ~/.config/nvim pull` +
   `nvim --headless "+Lazy! restore" +qa`).
 
