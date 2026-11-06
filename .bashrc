@@ -107,6 +107,22 @@ if __have eza; then
   # Icons need a Nerd Font; VS Code's terminal usually doesn't have one
   __EZA_ICONS=auto
   [ "$TERM_PROGRAM" = vscode ] && __EZA_ICONS=never
+  # Muted colours (eza's defaults are bold yellow/red/green). Codes: eza_colors(5).
+  # Names keep colour (dirs blue, executables green, links teal) but not bold;
+  # metadata columns are greys, only "x" and big sizes get a soft tint.
+  __c() { printf '%s=38;5;%s:' "$@"; }
+  EZA_COLORS="$(
+    __c di 75 ex 114 ln 80 or 203 pi 179 so 179 bd 179 cd 179 # file kinds
+    __c ur 244 uw 244 ux 108 ue 108 gr 242 gw 242 gx 242 tr 240 tw 240 tx 240 \
+        su 179 sf 179 xa 240 # permissions
+    __c sn 250 sb 242 df 250 ds 242 nb 244 nk 250 nm 250 ng 179 nt 208 \
+        ub 240 uk 242 um 242 ug 242 ut 242 # sizes
+    __c uu 244 uR 203 un 240 gu 244 gR 203 gn 240 # users / groups
+    __c da 244 lc 244 lm 244 in 240 bl 240 hd 244 xx 238 lp 80 cc 179 bO 203 # misc
+    __c im 250 vi 250 mu 250 lo 250 cr 250 do 250 co 250 tm 240 cm 240 bu 250 sc 250 # file types
+  )"
+  export EZA_COLORS
+  unset -f __c
   # Always pass a path: without one, eza reads file names from stdin when stdin
   # isn't a terminal (pipes, Claude Code/VS Code tool shells) -> empty or hangs.
   # Options must use the --opt=value form.

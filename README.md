@@ -59,7 +59,8 @@ VS Code (Windows) ── Remote-SSH ──> cluster
   it: `unset http_proxy https_proxy no_proxy` in its `~/.bashrc.local`.
 - **History, readline, colours, aliases, `extract`, `mkcd`, fzf integration.**
 - **`ls` = eza** (if installed): icons (off in VS Code's terminal, which has no
-  Nerd Font), dirs first, no git column. `ll` long + dotfiles, `la`, `lt` by
+  Nerd Font), dirs first, no git column, muted colours (`EZA_COLORS`: grey
+  metadata, non-bold names). `ll` long + dotfiles, `la`, `lt` by
   time (newest last), `tree` (2 levels, skips `.git`/`build`). `ls` is a function
   that always passes a path, because eza otherwise reads file names from stdin
   when it isn't a terminal (pipes, Claude Code tool shells). Use `--opt=value`
