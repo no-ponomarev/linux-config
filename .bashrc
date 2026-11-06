@@ -266,7 +266,7 @@ PROMPT_COMMAND="__build_prompt${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 # AI / tokens
 # ─────────────────────────────────────────────────────────────────────────────
 # Secrets live in ~/.bashrc.secrets (chmod 600), not in this file, so .bashrc
-# can be copied/shared safely. It holds e.g. AWS_BEARER_TOKEN_BEDROCK.
+# can be copied/shared safely (private tokens, exported as env variables).
 [ -r "$HOME/.bashrc.secrets" ] && . "$HOME/.bashrc.secrets"
 
 # Github token
